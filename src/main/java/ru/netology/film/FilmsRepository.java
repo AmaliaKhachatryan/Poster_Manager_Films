@@ -16,6 +16,7 @@ public class FilmsRepository {
     public DataFilm[] findAll() {
         return films;
     }
+
     public void save(DataFilm film) {
         DataFilm[] newFilm = new DataFilm[films.length + 1];
         for (int i = 0; i < films.length; i++) {
@@ -59,11 +60,22 @@ public class FilmsRepository {
     }
 
     public DataFilm[] listOfLastFilms() {
-        DataFilm[] listOfLastFilms = new DataFilm[amountLastFilms];
-        for (int i = 0; i < listOfLastFilms.length; i++) {
-            listOfLastFilms[i] = films[films.length - 1 - i];
+        DataFilm[] listOfLastFilms;
+        if (films.length < amountLastFilms) {
+            listOfLastFilms = new DataFilm[films.length];
+            for (int y = 0; y < listOfLastFilms.length; y++) {
+                listOfLastFilms[y] = films[films.length - 1 - y];
+            }
+        }
+        else {
+            listOfLastFilms = new DataFilm[amountLastFilms];
+            for (int i = 0; i < listOfLastFilms.length; i++) {
+                listOfLastFilms[i] = films[films.length - 1 - i];
+            }
         }
         return listOfLastFilms;
     }
+    }
 
-}
+
+

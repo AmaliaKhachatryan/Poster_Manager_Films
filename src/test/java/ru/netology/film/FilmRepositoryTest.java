@@ -37,7 +37,7 @@ class FilmRepositoryTest {
     }
 
     @Test
-    public void getRemoveTest() {
+    public void getRemoveLastFilmTest() {
         repo.save(film1);
         repo.save(film2);
         repo.save(film3);
@@ -54,7 +54,28 @@ class FilmRepositoryTest {
         DataFilm[] expected = {film1, film2, film3, film4, film5, film6, film7, film8, film9, film10, film11};
         Assertions.assertArrayEquals(expected, repo.findAll());
     }
-
+    @Test
+    public void getRemoveFirstFilmTest() {
+        repo.save(film1);
+        repo.save(film2);
+        repo.save(film3);
+        repo.save(film4);
+        repo.save(film5);
+        repo.removeById(1);
+        DataFilm[] expected = {film2, film3, film4, film5,};
+        Assertions.assertArrayEquals(expected, repo.findAll());
+    }
+    @Test
+    public void getRemoveCenterFilmTest() {
+        repo.save(film1);
+        repo.save(film2);
+        repo.save(film3);
+        repo.save(film4);
+        repo.save(film5);
+        repo.removeById(3);
+        DataFilm[] expected = {film1,film2,film4, film5};
+        Assertions.assertArrayEquals(expected, repo.findAll());
+    }
     @Test
     public void reversListOfFilmsTest() {
         repo.save(film1);
@@ -64,7 +85,13 @@ class FilmRepositoryTest {
         Assertions.assertArrayEquals(expected, repo.reversAll());
 
     }
+    @Test
+    public void reversListOfOneFilmTest() {
+        repo.save(film1);
+        DataFilm[] expected = {film1};
+        Assertions.assertArrayEquals(expected, repo.reversAll());
 
+    }
     @Test
     public void listOfLastFilmsTest() {
         repo.save(film1);
@@ -82,7 +109,34 @@ class FilmRepositoryTest {
         DataFilm[] expected = {film12, film11, film10, film9, film8, film7, film6, film5, film4, film3};
         Assertions.assertArrayEquals(expected, repo.listOfLastFilms());
     }
-
+    @Test
+    public void listOfLastLessThanTenFilmsTest() {
+        repo.save(film1);
+        repo.save(film2);
+        repo.save(film3);
+        repo.save(film4);
+        repo.save(film5);
+        repo.save(film6);
+        repo.save(film7);
+        repo.save(film8);
+        DataFilm[] expected = {film8, film7, film6, film5, film4, film3,film2,film1};
+        Assertions.assertArrayEquals(expected, repo.listOfLastFilms());
+    }
+    @Test
+    public void listOfLastTenFilmsTest() {
+        repo.save(film1);
+        repo.save(film2);
+        repo.save(film3);
+        repo.save(film4);
+        repo.save(film5);
+        repo.save(film6);
+        repo.save(film7);
+        repo.save(film8);
+        repo.save(film9);
+        repo.save(film10);
+        DataFilm[] expected = {film10, film9,film8, film7, film6, film5, film4, film3,film2,film1};
+        Assertions.assertArrayEquals(expected, repo.listOfLastFilms());
+    }
     @Test
     public void removeListFilmsTest() {
         repo.save(film1);
